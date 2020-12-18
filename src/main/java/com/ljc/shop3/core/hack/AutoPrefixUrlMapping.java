@@ -15,12 +15,12 @@ public class AutoPrefixUrlMapping extends RequestMappingHandlerMapping {
 //        String packageName = this.getPrefix(handlerType);
         //原请求链接
         RequestMappingInfo mappingInfo = super.getMappingForMethod(method, handlerType);
-        System.out.println(mappingInfo);
+//        System.out.println(mappingInfo);
 
         if(mappingInfo != null) {
             String prefix = this.getPrefix(handlerType); // /v1
             RequestMappingInfo newMappingInfo = RequestMappingInfo.paths(prefix).build().combine(mappingInfo);
-            System.out.println(newMappingInfo);
+//            System.out.println(newMappingInfo);
             return newMappingInfo;
         }
         return mappingInfo;
