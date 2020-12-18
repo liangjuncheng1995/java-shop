@@ -1,5 +1,7 @@
 package com.ljc.shop3.api.v1;
 
+import com.ljc.shop3.exception.http.ForbiddenException;
+import com.ljc.shop3.exception.http.NotFoundException;
 import com.ljc.shop3.sample.IConnect;
 import com.ljc.shop3.sample.ISkill;
 import com.ljc.shop3.sample.hero.Diana;
@@ -11,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/v1/banner")
+@RequestMapping("/banner")
 public class BannerController {
 
     @Autowired() //方便
@@ -33,7 +35,10 @@ public class BannerController {
     @GetMapping("/test")
     public String test() throws Exception{
         iSkill.r();
-        throw new Exception("SB");
+//        throw new NotFoundException(10001);
+
+        throw new ForbiddenException(10001);
+//        throw new Exception("SB");
 //        throw new RuntimeException("sds");
 //        return "hello  JAVA";
     }
