@@ -6,15 +6,20 @@ import com.ljc.shop3.exception.http.NotFoundException;
 import com.ljc.shop3.sample.IConnect;
 import com.ljc.shop3.sample.ISkill;
 import com.ljc.shop3.sample.hero.Diana;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Max;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/banner")
+@Validated
 public class BannerController {
 
     @Autowired() //方便
@@ -45,10 +50,10 @@ public class BannerController {
 ////        throw new RuntimeException("sds");
 ////        return "hello  成";
 //    }
-    @PostMapping("/test/{id1}")
-    public PersionDTO test(@PathVariable(name = "id1") Integer id,
-                       @RequestParam String name,
-                       @RequestBody PersionDTO person
+    @PostMapping("/test/{id}")
+    public PersionDTO test(@PathVariable @Range(min = 1,max = 10,message = "范围超出了") Integer id,
+                       @RequestParam @Length(min=8) String name,
+                       @RequestBody @Validated PersionDTO person
     ) throws Exception{
         //需要装箱的过程
 //        vo //返回前端的数据类型
