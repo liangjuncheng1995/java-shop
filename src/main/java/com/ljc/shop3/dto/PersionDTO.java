@@ -22,7 +22,10 @@ package com.ljc.shop3.dto;
 
 //bug
 
-import lombok.*;
+//import lombok.*;
+
+import lombok.Builder;
+import lombok.Getter;
 
 //@Setter //推荐
 ////@Data
@@ -31,6 +34,7 @@ import lombok.*;
 //@RequiredArgsConstructor //参数标注了 @NonNull 注解，生成构造函数的注解
 //equals hashCode toString
 @Builder //调用方不用实例化使用，想实例化使用，需要添加对应的NoArgsConstructor和Setter注解
+//@Getter
 @Getter
 
 public class PersionDTO {
