@@ -1,23 +1,10 @@
 package com.ljc.shop3.api.v1;
 
-import com.ljc.shop3.dto.PersionDTO;
-import com.ljc.shop3.exception.http.ForbiddenException;
-import com.ljc.shop3.exception.http.NotFoundException;
 import com.ljc.shop3.model.Banner;
-import com.ljc.shop3.sample.IConnect;
-import com.ljc.shop3.sample.ISkill;
-import com.ljc.shop3.sample.hero.Diana;
 import com.ljc.shop3.service.BannerService;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.Range;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.constraints.Max;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/banner")
@@ -101,7 +88,6 @@ public class BannerController {
 
     @GetMapping("/name/{name}")
     public Banner getByName(@PathVariable String name) {
-//        System.out.println("12");
         Banner banner = bannerService.getByName(name);
         return banner;
     }

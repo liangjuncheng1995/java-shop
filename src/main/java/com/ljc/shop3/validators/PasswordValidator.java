@@ -17,10 +17,11 @@ public class PasswordValidator implements ConstraintValidator<PasswordEqual, Per
 
     @Override
     public boolean isValid(PersionDTO persionDTO, ConstraintValidatorContext constraintValidatorContext) {
-        String password1 = persionDTO.getPassword1();
-        String password2 = persionDTO.getPassword2();
-        boolean match = password1.equals(password2);
-        return match;
+//        String password1 = persionDTO.getPassword1();
+//        String password2 = persionDTO.getPassword2();
+//        boolean match = password1.equals(password2);
+//        return match;
+        return false;
     }
 }
 

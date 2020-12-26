@@ -1,25 +1,26 @@
 package com.ljc.shop3.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.Objects;
 
-@Entity //表达表的数据结构
-public class BannerItem {
+
+@Getter
+@Setter
+@Entity
+public class BannerItem extends BaseEntity{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
+    private Long id;
     private String img;
-
     private String keyword;
+    private short type;
 
-    private Short type;
-
+    private Long bannerId;
     private String name;
 
-    private long bannerId; //外键
 
-    //foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT)禁用物理的外键
-    @ManyToOne
-    @JoinColumn(foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT), insertable = false, updatable = false, name = "bannerId")
-    private Banner banner;
 }
