@@ -16,6 +16,8 @@ public class BannerServiceImpl implements BannerService{
         //数据表如何创建
         //如何查询数据库
 
+        System.out.println(name);
+
         return bannerRepository.findOneByName(name);
 
     }
