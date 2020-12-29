@@ -40,7 +40,7 @@ public class ThemeController {
                                        @RequestParam(name = "count", defaultValue = "10") Integer count
                                         ) {
         Optional<Theme>  optionalTheme = this.themeService.findByName(themeName);
-        return optionalTheme.orElseThrow(() -> new NotFoundException(3000));
+        return optionalTheme.orElseThrow(() -> new NotFoundException(30003));
 
     }
 
