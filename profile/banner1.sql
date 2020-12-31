@@ -20,3 +20,31 @@ CREATE TABLE `banner1` (
 BEGIN;
 INSERT INTO `banner1` VALUES ('1', 'b-1', '首页顶部主banner1', '2019-07-28 04:47:15.000', '2019-08-04 01:03:16.000', null, null, null), ('2', 'b-2', '热销商品banner1', '2019-08-01 00:37:47.000', '2019-09-20 00:56:45.843', null, null, null);
 COMMIT;
+
+
+package com.ljc.shop3.model;
+
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.Where;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+@Getter
+@Setter
+@Where(clause = "delete_time is null and online=1")
+public class GridCategory extends BaseEntity{
+    @Id
+    private Long id;
+
+    private String title;
+
+    private String name;
+
+    private Long categoryId;
+
+    private Long rootCategoryId;
+
+}

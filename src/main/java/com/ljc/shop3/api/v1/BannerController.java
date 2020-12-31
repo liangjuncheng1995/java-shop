@@ -1,5 +1,6 @@
 package com.ljc.shop3.api.v1;
 
+import com.ljc.shop3.core.interceptors.ScopeLevel;
 import com.ljc.shop3.exception.http.NotFoundException;
 import com.ljc.shop3.model.Banner;
 import com.ljc.shop3.service.BannerService;
@@ -88,6 +89,7 @@ public class BannerController {
     private BannerService bannerService;
 
     @GetMapping("/name/{name}")
+    @ScopeLevel()
     public Banner getByName(@PathVariable String name) {
         Banner banner = bannerService.getByName(name);
         if(banner == null) {

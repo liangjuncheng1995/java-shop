@@ -12,3 +12,10 @@ spring:
 
 shop:
   api-package: com.ljc.shop3.api
+
+
+wx:
+  appid: wx96ede89c1842a507
+  appsecret: 203c40c673db47d88f9c8d3a1674b0be
+  code2session: https://api.weixin.qq.com/sns/jscode2session?appid={0}&secret={1}&js_code={2}&grant_type=authorization_code
+

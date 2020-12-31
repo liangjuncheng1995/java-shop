@@ -1,4 +1,4 @@
-package com.ljc.shop3.validators;
+package com.ljc.shop3.dto.validators;
 
 import com.ljc.shop3.dto.PersionDTO;
 

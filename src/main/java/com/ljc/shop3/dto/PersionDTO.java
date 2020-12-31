@@ -23,12 +23,9 @@ package com.ljc.shop3.dto;
 //bug
 
 
-import com.ljc.shop3.validators.PasswordEqual;
+import com.ljc.shop3.dto.validators.PasswordEqual;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
-
-import javax.validation.Valid;
-import javax.validation.constraints.Max;
 
 //@Setter //推荐
 ////@Data

@@ -12,3 +12,9 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+
+
+shop3:
+  security:
+    jwt-key: ccccheng
+    token-expired-in: 8640000
