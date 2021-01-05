@@ -1,10 +1,12 @@
 package com.ljc.shop3.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.ljc.shop3.util.GenericAndJson;
 import com.ljc.shop3.util.ListAndJson;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -13,10 +15,12 @@ import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
 @Setter
+@Where(clause = "delete_time is null and online =1")
 public class Sku extends BaseEntity{
     @Id
     private Long id;
@@ -37,6 +41,12 @@ public class Sku extends BaseEntity{
     private String code;
     private Long stock;
 
+    public BigDecimal getActualPrice() {
+        return discountPrice == null ? this.price : this.discountPrice;
+    }
+
+
+
     public List<Spec> getSpecs() {
         if(this.specs == null){
             return Collections.emptyList();
@@ -52,5 +62,10 @@ public class Sku extends BaseEntity{
         this.specs = GenericAndJson.objectToJson(specs);
     }
 
+    @JsonIgnore
+    public List<String> getSpecValueList() {
+        return this.getSpecs().stream()
+                .map(Spec::getValue).collect(Collectors.toList());
+    }
 
 }

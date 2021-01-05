@@ -12,6 +12,7 @@ spring:
 
 shop:
   api-package: com.ljc.shop3.api
+  year-codes: A,B,C,D,E,F,G,H,I,J,K,L
 
 
 wx:

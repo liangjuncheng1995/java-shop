@@ -18,3 +18,8 @@ shop3:
   security:
     jwt-key: ccccheng
     token-expired-in: 8640000
+  order:
+    max-sku-limit: 777
+    pay-time-limit: 3600
+
+
