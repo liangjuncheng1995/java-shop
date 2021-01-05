@@ -1,7 +1,10 @@
 package com.ljc.shop3.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.ljc.shop3.core.enumeration.OrderStatus;
 import com.ljc.shop3.dto.OrderAddressDTO;
+import com.ljc.shop3.util.CommonUtil;
 import com.ljc.shop3.util.GenericAndJson;
 import lombok.*;
 import org.hibernate.annotations.Where;
@@ -48,6 +51,25 @@ public class Order extends BaseEntity{
 
     private Date expiredTime;
     private Date placedTime;
+
+    //充血模式 贫血模式
+
+    @JsonIgnore
+    public OrderStatus getStatusEnum() {
+        return OrderStatus.toType(this.status);
+    }
+
+    public Boolean needCancel() {
+        if (!this.getStatusEnum().equals(OrderStatus.UNPAID)) {
+            return true;
+        }
+        boolean isOutOfDate = CommonUtil.isOutOfDate(this.getExpiredTime());
+        if (isOutOfDate) {
+            return true;
+        }
+        return false;
+    }
+
 
 
     public List<OrderSku> getSnapItems() {

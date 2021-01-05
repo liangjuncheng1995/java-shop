@@ -28,4 +28,13 @@ public class CommonUtil {
         }
         return false;
     }
+
+    public static Boolean isOutOfDate(Date expiredTime) {
+        Long now = Calendar.getInstance().getTimeInMillis();
+        Long expiredTimeStamp = expiredTime.getTime();
+        if(now > expiredTimeStamp){
+            return true;
+        }
+        return false;
+    }
 }
