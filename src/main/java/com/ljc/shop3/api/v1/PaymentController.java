@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import sun.net.httpserver.HttpServerImpl;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.Positive;
 import java.util.Map;
 import java.util.Optional;
@@ -31,6 +34,12 @@ public class PaymentController {
     public Map<String, String> preWxOrder(@PathVariable(name = "id") @Positive Long oid) {
 
 
+        return null;
+    }
+
+    @RequestMapping("/wx/notify")
+    public String payCallback(HttpServletRequest request,
+                              HttpServletResponse response) {
         return null;
     }
 

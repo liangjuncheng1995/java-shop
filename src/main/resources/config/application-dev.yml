@@ -21,5 +21,7 @@ shop3:
   order:
     max-sku-limit: 777
     pay-time-limit: 3600
+    pay-callback-host: http://talein.com
+    pay-callback-path: /v1/payment/wx/notify
 
 
