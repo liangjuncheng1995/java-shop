@@ -122,6 +122,15 @@ public class OrderService {
         return this.orderRepository.findFirstByUserIdAndId(uid, oid);
     }
 
+    public void updateOrderPrepayId(Long orderId, String prePayId) {
+        Optional<Order> order = this.orderRepository.findById(orderId);
+        order.ifPresent(o ->{
+            o.setPrepayId(prePayId);
+            this.orderRepository.save(o);
+        });
+        order.orElseThrow(() -> new NotFoundException(10007));
+    }
+
     private void writeOffCoupon(Long couponId, Long oid, Long uid) {
         int result = this.userCouponRepository.writeOff(couponId, oid, uid);
         if(result != 1) {

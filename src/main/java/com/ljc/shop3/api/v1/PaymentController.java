@@ -6,8 +6,11 @@ import com.ljc.shop3.core.LocalUser;
 import com.ljc.shop3.core.interceptors.ScopeLevel;
 import com.ljc.shop3.exception.http.ForbiddenException;
 import com.ljc.shop3.exception.http.NotFoundException;
+import com.ljc.shop3.lib.LinWxNotify;
 import com.ljc.shop3.model.Order;
 import com.ljc.shop3.repository.OrderRepository;
+import com.ljc.shop3.service.WxPaymentNotifyService;
+import com.ljc.shop3.service.WxPaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +22,8 @@ import sun.net.httpserver.HttpServerImpl;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.Positive;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
 import java.util.Optional;
 
@@ -27,21 +32,37 @@ import java.util.Optional;
 @Validated
 public class PaymentController {
 
+    @Autowired
+    private WxPaymentService wxPaymentService;
 
+    @Autowired
+    private WxPaymentNotifyService wxPaymentNotifyService;
 
     @PostMapping("/pay/order/{id}")
     @ScopeLevel
     public Map<String, String> preWxOrder(@PathVariable(name = "id") @Positive Long oid) {
-
-
-        return null;
+        Map<String, String> miniPayParams = this.wxPaymentService.preOrder(oid);
+        return miniPayParams;
     }
 
     @RequestMapping("/wx/notify")
     public String payCallback(HttpServletRequest request,
                               HttpServletResponse response) {
-        return null;
+        InputStream s;
+        try {
+            s = request.getInputStream();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return LinWxNotify.fail();
+        }
+        String xml;
+        xml = LinWxNotify.readNotify(s);
+        try{
+            this.wxPaymentNotifyService.processPayNotify(xml);
+        }catch (Exception e) {
+            return LinWxNotify.fail();
+        }
+        return LinWxNotify.success();
     }
 
-//    private
 }
